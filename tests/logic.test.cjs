@@ -1,0 +1,9 @@
+const assert=require('node:assert/strict');
+const {test}=require('node:test');
+const {monthlyIncome,budget,totals,goalProgress}=require('../dist/logic.js');
+test('hourly and weekly pay annualize over 52 weeks, not four-week months',()=>{assert.equal(monthlyIncome({pay:15,hours:20,frequency:'hourly',extra:100}),1400);assert.equal(monthlyIncome({pay:300,frequency:'weekly'}),1300);assert.equal(monthlyIncome({pay:2000,frequency:'monthly',extra:200}),2200);});
+test('budget covers essentials and allocates savings before flexible spending',()=>{assert.deepEqual(budget({pay:2000,frequency:'monthly',rate:20,essentials:{rent:800,food:200}}),{income:2000,essentials:1000,savings:400,flexible:600,target:400,deficit:0,weekly:138.46});});
+test('insufficient income caps savings; deficit is explicit',()=>{const b=budget({pay:1000,frequency:'monthly',rate:20,essentials:{rent:950}});assert.equal(b.savings,50);assert.equal(b.flexible,0);const d=budget({pay:500,frequency:'monthly',rate:20,essentials:{rent:650}});assert.equal(d.deficit,150);assert.equal(d.savings,0);assert.equal(d.flexible,0);});
+test('zero income gives finite values',()=>{const b=budget({pay:0,rate:20,essentials:{}});assert.equal(b.weekly,0);assert.equal(b.income,0);});
+test('actual monthly totals separate savings from spending and filter months',()=>{const tx=[{date:'2026-10-01',type:'income',amount:1000},{date:'2026-10-02',type:'expense',amount:300.1},{date:'2026-10-03',type:'saving',amount:150},{date:'2026-09-01',type:'income',amount:500}];assert.deepEqual(totals(tx,'2026-10'),{income:1000,expense:300.1,saving:150,available:549.9});});
+test('goal handles completed goal and no available savings',()=>{assert.equal(goalProgress({amount:1000,start:250},[{date:'2026-10-01',type:'saving',amount:150}],200).months,3);assert.equal(goalProgress({amount:1000,start:250},[],0).months,null);assert.equal(goalProgress({amount:1000,start:1200},[],0).months,0);});

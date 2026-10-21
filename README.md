@@ -1,2 +1,38 @@
-# second-try-budget-app
-improved budgeting app
+# HealthyPockets
+
+A simple student budgeting app in white, navy, and baby blue. Built with plain HTML, CSS, and JavaScript; no build step, account setup, or API keys required.
+
+## Test immediately in a Codespace
+
+Pull the latest files, then run:
+
+```bash
+git pull origin main
+python3 -m http.server 8000 --directory dist
+```
+
+Open the **Ports** tab, locate **8000**, and click **Open in Browser**. Keep the port private. Alternatively, download the repository and open `dist/index.html` in a browser.
+
+Click **Try a student example** to explore sample data. Click **Start with my own numbers** to begin fresh. Your data is stored only in this browser's localStorage, for this site's origin. It does not sync between devices, the hosted preview, or Codespaces. Clearing browser storage removes it.
+
+## Features
+
+- Hourly, weekly, or monthly take-home income, plus other monthly support.
+- Editable essential expenses and a savings percentage.
+- Monthly plan and weekly flexible spending allowance; explicit shortfall handling.
+- Actual income, expense, and savings-transfer logs, month selection, and deletion with undo.
+- Six-month comparison of recorded income, spending, and savings.
+- Savings goal with starting balance, recorded contributions, and estimated timeline.
+- Responsive, keyboard-accessible forms and browser persistence.
+
+## Calculation rules
+
+Weekly pay is multiplied by 52/12. Hourly pay is multiplied by weekly hours and 52/12. Monthly savings are capped at income left after essentials; flexible spending never goes below zero. The app shows a shortfall if essentials exceed income. Plans are estimates and never create actual transactions automatically. Monthly cash remaining equals recorded income minus expenses minus savings transfers; it is not a bank balance. Goal progress counts starting savings plus all recorded savings transfers; only record new transfers after the starting balance. Goal forecasts assume the current monthly saving allocation continues, without investment returns. The demo uses illustrative data.
+
+## Verify
+
+```bash
+node --test tests/logic.test.cjs
+```
+
+No bank connection, tax calculator, or financial account integration. Google Fonts is optional; system fonts remain available if it cannot load.
