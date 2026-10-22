@@ -18,9 +18,11 @@ Click **Try a student example** to explore sample data. Click **Start with my ow
 ## Features
 
 - Hourly, weekly, or monthly take-home income, plus other monthly support.
-- Editable essential expenses and a savings percentage.
+- Editable everyday essentials and three side-by-side savings targets: Low (10%), Moderate (20%), Aggressive (30%).
 - Monthly plan and weekly flexible spending allowance; explicit shortfall handling.
 - Actual income, expense, and savings-transfer logs, month selection, and deletion with undo.
+- Monthly recurring fixed expenses and savings, with inclusive start/end months, editing, removal with undo, and explicit recording of each occurrence.
+- A 6-, 12-, or 24-month planning table compares plans with recorded totals and cumulative planned savings.
 - Six-month comparison of recorded income, spending, and savings.
 - Savings goal with starting balance, recorded contributions, and estimated timeline.
 - Responsive, keyboard-accessible forms and browser persistence.
@@ -36,3 +38,7 @@ node --test tests/logic.test.cjs
 ```
 
 No bank connection, tax calculator, or financial account integration. Google Fonts is optional; system fonts remain available if it cannot load.
+
+## Planning details
+
+Recurring items are estimates until explicitly recorded. Scheduled savings set a minimum within the selected savings allocation rather than being added twice; all savings remain capped by available income. Schedules apply in both past and future months. The timeline uses current income and everyday expense assumptions, not historical budget snapshots. Its cumulative total starts at zero in the selected range, without investment returns. Recording a scheduled item marks that occurrence to prevent recording it again; deleting its transaction makes it available again. Existing manually entered transactions cannot automatically be matched to a schedule. Do not enter the same expense as both an everyday estimate and a fixed schedule. Existing v1 browser data is preserved, including custom savings rates until a new option is selected.
