@@ -22,7 +22,7 @@ Click **Try a student example** to explore sample data. Click **Start with my ow
 - Monthly plan and weekly flexible spending allowance; explicit shortfall handling.
 - Actual income, expense, and savings-transfer logs, month selection, and deletion with undo.
 - Monthly recurring fixed expenses and savings, with inclusive start/end months, editing, removal with undo, and explicit recording of each occurrence.
-- A 6-, 12-, or 24-month planning table compares plans with recorded totals and cumulative planned savings.
+- A 6-, 12-, or 24-month planning table compares the long-term savings totals for all three plans, alongside month-by-month totals for the selected plan and recorded activity.
 - Six-month comparison of recorded income, spending, and savings.
 - Savings goal with starting balance, recorded contributions, and estimated timeline.
 - Responsive, keyboard-accessible forms and browser persistence.
